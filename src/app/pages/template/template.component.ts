@@ -12,4 +12,8 @@ export class TemplateComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  guardar() {
+    console.info("submit");
+  }
 }
