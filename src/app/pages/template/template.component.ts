@@ -21,7 +21,15 @@ export class TemplateComponent implements OnInit {
 
 
   guardar( forma: NgForm  ) {
-    console.info(forma);
+    console.log(forma);
+
+    if (forma.invalid) {
+      Object.values(forma.controls).forEach( control => {
+        control.markAsTouched();
+      } );
+      return;
+    }
+
     console.log(forma.value);
     console.log(forma.valid);
   }
