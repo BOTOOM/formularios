@@ -13,7 +13,7 @@ export class TemplateComponent implements OnInit {
     nombre: 'edwar',
     apellido: 'diaz',
     correo: 'eddiazruiz@acm.org',
-    pais: ''
+    pais: 'CRI'
   };
 
   paises: any[] = [];
@@ -34,6 +34,7 @@ export class TemplateComponent implements OnInit {
 
   guardar( forma: NgForm  ) {
     console.log(forma);
+    console.log(forma.valid);
 
     if (forma.invalid) {
       Object.values(forma.controls).forEach( control => {
