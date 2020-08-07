@@ -32,11 +32,22 @@ export class ReactiveComponent implements OnInit {
     return this.forma.get('correo').invalid  && this.forma.get('correo').touched;
   }
 
+  get distritoNovalido() {
+    return this.forma.get('direccion.distrito').invalid  && this.forma.get('direccion.distrito').touched;
+  }
+
+  get cuidadNovalido() {
+    return this.forma.get('direccion.cuidad').invalid  && this.forma.get('direccion.cuidad').touched;
+  }
   crearFormulario() {
     this.forma = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(5)] ],
       apellido: ['', Validators.required],
       correo: ['', [Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$') , Validators.required ]],
+      direccion: this.fb.group({
+        distrito: ['', Validators.required],
+        cuidad: ['', Validators.required],
+      }),
     });
   }
 
@@ -45,7 +56,11 @@ export class ReactiveComponent implements OnInit {
 
     if (this.forma.invalid) {
       return Object.values(this.forma.controls).forEach( control => {
-        control.markAsTouched();
+        if ( control instanceof FormGroup ) {
+          Object.values(control.controls).forEach( controlF => controlF.markAllAsTouched() );
+        } else {
+          control.markAsTouched();
+        }
       } );
     }
   }

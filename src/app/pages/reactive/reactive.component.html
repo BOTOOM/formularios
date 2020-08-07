@@ -6,33 +6,25 @@
 
     <div class="form-group row">
       <label class="col-2 col-form-label">Nombre</label>
-      <div class="col-8">
+      <div class="col">
 
-        <input class="form-control"
-               type="text"
-               placeholder="Nombre"
-               formControlName="nombre"
-               [class.is-invalid]="nombreNovalido" 
-               >
-               <small *ngIf="nombreNovalido" class="text-danger">
-                 Ingrese 5 letras
-               </small>
+        <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre"
+          [class.is-invalid]="nombreNovalido">
+        <small *ngIf="nombreNovalido" class="text-danger">
+          Ingrese 5 letras
+        </small>
       </div>
     </div>
 
     <div class="form-group row">
       <label class="col-2 col-form-label">Apellido</label>
-      <div class="col-8">
+      <div class="col">
 
-        <input class="form-control"
-               type="text"
-               placeholder="Apellido"
-               formControlName="apellido"
-               [class.is-invalid]="apellidoNovalido" 
-               >
-               <small *ngIf="apellidoNovalido" class="text-danger">
-                Ingrese el apellido
-              </small>
+        <input class="form-control" type="text" placeholder="Apellido" formControlName="apellido"
+          [class.is-invalid]="apellidoNovalido">
+        <small *ngIf="apellidoNovalido" class="text-danger">
+          Ingrese el apellido
+        </small>
       </div>
     </div>
 
@@ -40,17 +32,25 @@
 
   <div class="form-group row">
     <label class="col-2 col-form-label">Correo</label>
-    <div class="col-8">
+    <div class="col">
 
-      <input class="form-control"
-             type="email"
-             placeholder="Correo electrónico"
-             formControlName="correo"
-             [class.is-invalid]="correoNovalido" 
-             >
-             <small *ngIf="correoNovalido" class="text-danger">
-              Ingrese ingrese un correo valido
-            </small>
+      <input class="form-control" type="email" placeholder="Correo electrónico" formControlName="correo"
+        [class.is-invalid]="correoNovalido">
+      <small *ngIf="correoNovalido" class="text-danger">
+        Ingrese ingrese un correo valido
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group row" formGroupName="direccion">
+    <label class="col-2 col-form-label">Dirección</label>
+    <div class="form-row col ">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Distrito" formControlName="distrito" [class.is-invalid]="distritoNovalido">
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Cuidad" formControlName="cuidad" [class.is-invalid]="cuidadNovalido">
+      </div>
     </div>
   </div>
 
@@ -58,7 +58,7 @@
 
   <div class="form-group row">
     <label class="col-2 col-form-label">&nbsp;</label>
-    <div class="input-group col-md-8">
+    <div class="input-group col">
       <button type="submit" class="btn btn-outline-primary btn-block">
         Guardar
       </button>
