@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive',
@@ -14,6 +14,7 @@ export class ReactiveComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.crearFormulario();
+    this.cargarData();
   }
 
   ngOnInit(): void {
@@ -39,6 +40,10 @@ export class ReactiveComponent implements OnInit {
   get cuidadNovalido() {
     return this.forma.get('direccion.cuidad').invalid  && this.forma.get('direccion.cuidad').touched;
   }
+
+  get pasatiempos() {
+    return this.forma.get('pasatiempos') as FormArray ;
+  }
   crearFormulario() {
     this.forma = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(5)] ],
@@ -48,7 +53,29 @@ export class ReactiveComponent implements OnInit {
         distrito: ['', Validators.required],
         cuidad: ['', Validators.required],
       }),
+      pasatiempos: this.fb.array([
+      ])
     });
+  }
+
+  cargarData() {
+    // this.forma.setValue({
+    this.forma.reset({
+      nombre: 'Antony',
+      apellido: 'Stack',
+      correo: 'iron@man.com',
+      direccion: {
+        distrito: 'torre A',
+        cuidad: 'new york'
+      }
+    });
+  }
+
+  agregarPasatiempo() {
+    this.pasatiempos.push( this.fb.control('', Validators.required) );
+  }
+  BorrarPasatiempo(i: number) {
+    this.pasatiempos.removeAt(i);
   }
 
   guardar() {
@@ -63,6 +90,8 @@ export class ReactiveComponent implements OnInit {
         }
       } );
     }
+    // cuidado con los select
+    this.forma.reset();
   }
 
 }
