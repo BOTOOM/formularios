@@ -35,6 +35,10 @@ export class ReactiveComponent implements OnInit {
     return this.forma.get('correo').invalid  && this.forma.get('correo').touched;
   }
 
+  get usuarioNovalido() {
+    return this.forma.get('usuario').invalid  && this.forma.get('usuario').touched;
+  }
+
   get distritoNovalido() {
     return this.forma.get('direccion.distrito').invalid  && this.forma.get('direccion.distrito').touched;
   }
@@ -46,17 +50,32 @@ export class ReactiveComponent implements OnInit {
   get pasatiempos() {
     return this.forma.get('pasatiempos') as FormArray ;
   }
+  get pass1Novalido() {
+    return this.forma.get('pass1').invalid  && this.forma.get('pass1').touched;
+  }
+  get pass2Novalido() {
+    const pass1 = this.forma.get('pass1').value;
+    const pass2 = this.forma.get('pass2').value;
+    // return this.forma.get('pass1').invalid  && this.forma.get('pass1').touched;
+    return (pass1 === pass2) ? false : true;
+  }
+
   crearFormulario() {
     this.forma = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(5)] ],
       apellido: ['', [Validators.required, this.validadores.noDiaz]],
+      pass1: ['', [Validators.required]],
+      pass2: ['', [Validators.required]],
       correo: ['', [Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$') , Validators.required ]],
+      usuario: ['', , this.validadores.existeUsuario],
       direccion: this.fb.group({
         distrito: ['', Validators.required],
         cuidad: ['', Validators.required],
       }),
       pasatiempos: this.fb.array([
       ])
+    }, {
+      validators: [this.validadores.passwordsIguales('pass1', 'pass2')]
     });
   }
 
@@ -66,6 +85,8 @@ export class ReactiveComponent implements OnInit {
       nombre: 'Antony',
       apellido: 'Stack',
       correo: 'iron@man.com',
+      pass1: '456',
+      pass2: '456',
       direccion: {
         distrito: 'torre A',
         cuidad: 'new york'

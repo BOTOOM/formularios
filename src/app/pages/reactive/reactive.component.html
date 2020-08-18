@@ -42,6 +42,42 @@
     </div>
   </div>
 
+  <div class="form-group row">
+    <label class="col-2 col-form-label">usuario</label>
+    <div class="col">
+
+      <input class="form-control" type="email" placeholder="Nombre de usuario" formControlName="usuario"
+        [class.is-invalid]="usuarioNovalido">
+      <small *ngIf="usuarioNovalido" class="text-danger">
+        Usuario ya existe
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Contraseña</label>
+    <div class="col">
+      <input class="form-control" type="password" placeholder="Contraseña" formControlName="pass1"
+        [class.is-invalid]="pass1Novalido"
+        >
+      <!-- <small *ngIf="correoNovalido" class="text-danger">
+        Ingrese ingrese un correo valido
+      </small> -->
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Confirmar Contraseña</label>
+    <div class="col">
+      <input class="form-control" type="password" placeholder="Confirmar Contraseña" formControlName="pass2"
+        [class.is-invalid]="pass2Novalido"
+        >
+      <small *ngIf="pass2Novalido" class="text-danger">
+        Las contraseñas deben de ser iguales
+      </small>
+    </div>
+  </div>
+
   <div class="form-group row" formGroupName="direccion">
     <label class="col-2 col-form-label">Dirección</label>
     <div class="form-row col ">
